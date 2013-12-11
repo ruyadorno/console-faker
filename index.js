@@ -17,10 +17,16 @@ var rl = readline.createInterface({
   output: ms
 });
 
-var file = fs.readFileSync(path.join(__dirname, 'test.js'));
-var chars = file.toString().split('');
+var file = null;
+var chars = null;
 var count = 0;
 var currentLine = '';
+
+var startFaking = function () {
+  readFile();
+  rl.input.on('keypress', onKeyPress);
+  print('> ');
+};
 
 var readFile = function (filename) {
   file = fs.readFileSync(path.join(__dirname, 'test.js'));
@@ -65,6 +71,4 @@ optimist
   .boolean(['help', 'version'])
   .wrap(80);
 
-rl.input.on('keypress', onKeyPress);
-
-print('> ');
+startFaking();
