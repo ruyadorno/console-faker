@@ -17,7 +17,6 @@ var rl = readline.createInterface({
   output: ms
 });
 
-var file = null;
 var chars = null;
 var count = 0;
 var currentLine = '';
@@ -30,8 +29,11 @@ var startFaking = function () {
 };
 
 var readFile = function (filenames) {
-  file = fs.readFileSync(path.join(__dirname, 'test.js'));
-  chars = file.toString().split('');
+  chars = [];
+  filenames.forEach(function (fname) {
+    var file = fs.readFileSync(path.join(__dirname, fname));
+    chars = chars.concat(file.toString().split(''));
+  });
   count = 0;
   currentLine = '';
 };
