@@ -8,6 +8,7 @@ var vm = require('vm');
 var readline = require('readline');
 var optimist = require('optimist');
 var MuteStream = require('mute-stream');
+var endOfLine = require('os').EOL;
 
 var ms = new MuteStream();
 ms.pipe(process.stdout);
@@ -45,12 +46,12 @@ var print = function (str) {
 };
 
 var breakLine = function (str) {
-  if (str === '\n') {
-    if (currentLine !== '' && currentLine !== '\n') {
+  if (str === endOfLine) {
+    if (currentLine !== '' && currentLine !== endOfLine) {
       try {
         vm.runInThisContext(currentLine);
       } catch(e) {}
-      print('\n');
+      print(endOfLine);
     }
     currentLine = '';
     print('> ');
