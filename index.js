@@ -23,12 +23,13 @@ var count = 0;
 var currentLine = '';
 
 var startFaking = function () {
-  readFile();
+  var filenames = setupOptimist();
+  readFile(filenames);
   rl.input.on('keypress', onKeyPress);
   print('> ');
 };
 
-var readFile = function (filename) {
+var readFile = function (filenames) {
   file = fs.readFileSync(path.join(__dirname, 'test.js'));
   chars = file.toString().split('');
   count = 0;
@@ -64,11 +65,14 @@ var onKeyPress = function () {
   breakLine(char);
 };
 
-optimist
-  .usage('console-faker [FILES]')
-  .alias('h', 'help').describe('h', 'Display help and usage details.')
-  .alias('v', 'version').describe('v', 'Display the current version.')
-  .boolean(['help', 'version'])
-  .wrap(80);
+var setupOptimist = function () {
+  return optimist
+    .usage('console-faker [FILES]')
+    .alias('h', 'help').describe('h', 'Display help and usage details.')
+    .alias('v', 'version').describe('v', 'Display the current version.')
+    .boolean(['help', 'version'])
+    .wrap(80)
+    .argv._;
+};
 
 startFaking();
