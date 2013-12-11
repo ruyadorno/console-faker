@@ -2,8 +2,8 @@
 
 var fs = require('fs');
 var path = require('path');
+var vm = require('vm');
 var readline = require('readline');
-var _eval = require('eval');
 var MuteStream = require('mute-stream');
 
 var ms = new MuteStream();
@@ -26,19 +26,23 @@ var print = function (str) {
     ms.mute();
 };
 
-var startLine = function () {
-    print('> ');
+var breakLine = function (str) {
+    if (str === '\n') {
+        if (currentLine !== '') {
+            vm.runInThisContext(currentLine);
+        }
+        currentLine = '';
+        print('> ');
+    }
 };
 
 var onKeyPress = function () {
     var char = chars[count++];
     currentLine += char;
-    if (char === '\n') {
-        _eval(currentLine, 'parse-line', self, true);
-    }
     print(char);
+    breakLine(char);
 };
 
 rl.input.on('keypress', onKeyPress);
 
-ms.mute();
+print('> ');
