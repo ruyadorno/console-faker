@@ -22,14 +22,16 @@ var chars = null;
 var count = 0;
 var currentLine = '';
 
+// Entry point
 var startFaking = function () {
   var filenames = setupOptimist();
-  readFile(filenames);
+  readFiles(filenames);
   rl.input.on('keypress', onKeyPress);
   print('> ');
 };
 
-var readFile = function (filenames) {
+// Read all files, store chars for outputing and reset counting
+var readFiles = function (filenames) {
   chars = [];
   filenames.forEach(function (fname) {
     var file = fs.readFileSync(path.join(__dirname, fname));
@@ -45,6 +47,7 @@ var print = function (str) {
   ms.mute();
 };
 
+// Test if line is ended and print/execute parsed chars
 var breakLine = function (str) {
   if (str === endOfLine) {
     if (currentLine !== '' && currentLine !== endOfLine) {
