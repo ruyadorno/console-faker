@@ -47,7 +47,9 @@ var print = function (str) {
 var breakLine = function (str) {
   if (str === '\n') {
     if (currentLine !== '' && currentLine !== '\n') {
-      vm.runInThisContext(currentLine);
+      try {
+        vm.runInThisContext(currentLine);
+      } catch(e) {}
       print('\n');
     }
     currentLine = '';
