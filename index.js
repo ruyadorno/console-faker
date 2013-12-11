@@ -18,7 +18,6 @@ var file = fs.readFileSync(path.join(__dirname, 'test.js'));
 var chars = file.toString().split('');
 var count = 0;
 var currentLine = '';
-var self = this;
 
 var print = function (str) {
     ms.unmute();
@@ -30,6 +29,7 @@ var breakLine = function (str) {
     if (str === '\n') {
         if (currentLine !== '') {
             vm.runInThisContext(currentLine);
+            print('\n');
         }
         currentLine = '';
         print('> ');
