@@ -27,7 +27,7 @@ var print = function (str) {
 
 var breakLine = function (str) {
     if (str === '\n') {
-        if (currentLine !== '') {
+        if (currentLine !== '' && currentLine !== '\n') {
             vm.runInThisContext(currentLine);
             print('\n');
         }
@@ -38,6 +38,11 @@ var breakLine = function (str) {
 
 var onKeyPress = function () {
     var char = chars[count++];
+    // When out of characters, just quit the program
+    if (!char) {
+        rl.close();
+        process.exit();
+    }
     currentLine += char;
     print(char);
     breakLine(char);
