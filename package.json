@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Get some pre-defined code to be print on console while typing anything on your keyboard. Great for presentations.",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
     "test": "mocha"
   },
@@ -23,6 +24,7 @@
     "url": "https://github.com/ruyadorno/console-faker/issues"
   },
   "dependencies": {
-    "mute-stream": "0.0.4"
+    "mute-stream": "0.0.4",
+    "optimist": "~0.6.0"
   }
 }
