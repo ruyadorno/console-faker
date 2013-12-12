@@ -1,7 +1,7 @@
 {
   "name": "console-faker",
   "version": "0.0.0",
-  "description": "Get some pre-defined code to be print on console while typing anything on your keyboard. Great for presentations.",
+  "description": "Get some file content to be printed out on console while you type anything on your keyboard.",
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
