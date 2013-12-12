@@ -25,6 +25,9 @@ var currentLine = '';
 // Entry point
 var startFaking = function () {
   var filenames = setupOptimist();
+  if (hasOptions()) {
+    process.exit(0);
+  }
   readFiles(filenames);
   rl.input.on('keypress', onKeyPress);
   print('> ');
@@ -65,8 +68,9 @@ var onKeyPress = function () {
   var char = chars[count++];
   // When out of characters, just quit the program
   if (!char) {
+    print(endOfLine);
     rl.close();
-    process.exit();
+    process.exit(0);
   }
   currentLine += char;
   print(char);
@@ -74,13 +78,26 @@ var onKeyPress = function () {
 };
 
 var setupOptimist = function () {
+  var helpMsg = 'Input anything on your keyboard and have the contents ';
+  helpMsg += 'of [FILES] printed out on stdout.\n';
   return optimist
-    .usage('console-faker [FILES]')
+    .usage('console-faker [FILES]' + endOfLine + endOfLine + helpMsg)
     .alias('h', 'help').describe('h', 'Display help and usage details.')
     .alias('v', 'version').describe('v', 'Display the current version.')
     .boolean(['help', 'version'])
     .wrap(80)
     .argv._;
+};
+
+var hasOptions = function () {
+  var argv = optimist.parse(process.argv);
+  if (argv.help) {
+    optimist.showHelp();
+    return true;
+  } else if (argv.version) {
+    print('console-faker v' + require('./package').version + endOfLine);
+    return true;
+  }
 };
 
 startFaking();
