@@ -37,7 +37,7 @@ var startFaking = function () {
 var readFiles = function (filenames) {
   chars = [];
   filenames.forEach(function (fname) {
-    var file = fs.readFileSync(path.join(__dirname, fname));
+    var file = fs.readFileSync(fname);
     chars = chars.concat(file.toString().split(''));
   });
   count = 0;
