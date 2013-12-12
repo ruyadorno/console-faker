@@ -3,7 +3,6 @@
 'use strict';
 
 var fs = require('fs');
-var path = require('path');
 var vm = require('vm');
 var readline = require('readline');
 var optimist = require('optimist');
