@@ -1,6 +1,6 @@
 {
   "name": "console-faker",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Get some file content to be printed out on console while you type anything on your keyboard.",
   "main": "index.js",
   "bin": "index.js",
