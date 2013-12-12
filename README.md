@@ -51,6 +51,13 @@ Will do the job. Just do not forget to give it the proper execution rights: `chm
 And execute your script with: `./run`.
 
 
+### Javascript file for a presentation
+
+Ideally, you will need a javascript file formatted just like if you were inputting it into the console. Actually creating it while inputting each line on the node console should be the better way to go.
+
+A small examples is available under the `example/presentation.js` file in the Github repository.
+
+
 ## License
 
 Released under the MIT license
